@@ -1,4 +1,4 @@
 XWATCH
 ======
 
-xwatch - execute a program periodically
+xwatch - execute a program on filesystem events
