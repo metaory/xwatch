@@ -1,0 +1,24 @@
+#!/bin/bash
+
+C=0
+F="${1:?MISSING_FILE}"
+RUNNER="${2:?MISSING_RUNNER}"
+
+echo "WATCHING ${F}"
+
+trap ctrl_c INT
+
+function ctrl_c() { exit; }
+
+function watch_sum { watch -g md5sum "$F" 1> /dev/null; process; }
+
+function process {
+  ((C++))
+  echo -e "\n\n ··· [${C}] ·············"
+  "$RUNNER" "$F"
+  watch_sum
+}
+
+process
+
+echo FINISHED
